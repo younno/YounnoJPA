@@ -42,7 +42,7 @@ dependencies {
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 
 	//Log Config	
-	compile('com.googlecode.log4jdbc:log4jdbc:1.2')
+	//compile('com.googlecode.log4jdbc:log4jdbc')
 	
 	//JSP 설정
 	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
@@ -52,6 +52,12 @@ dependencies {
 	//Utils Config
 	compile("org.projectlombok:lombok:1.18.2")
 	
+	//Dev mode 
+	compile('org.springframework.boot:spring-boot-devtools')
+	
+	//webjar
+	compile('org.webjars.bower:jquery:3.3.1')
+	compile('org.webjars.bower:bootstrap:4.1.3')
 	
 }
 

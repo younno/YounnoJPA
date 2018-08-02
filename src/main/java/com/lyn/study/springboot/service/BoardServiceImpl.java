@@ -1,33 +1,28 @@
 package com.lyn.study.springboot.service;
 
+import java.util.EventListener;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.lyn.study.springboot.domain.Board;
-import com.lyn.study.springboot.repository.BoardRepository;
+import com.lyn.study.springboot.entity.Board;
+import com.lyn.study.springboot.repository.BoardPagingRepository;
 
 
-@Service("contents")
-public class BoardServiceImpl {
+@Service("board")
+public class BoardServiceImpl implements BoardService{
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	private BoardRepository boardRepository;
-
-
-	public Page<Board> list(Model model, @RequestParam(defaultValue = "title") String type,
-			@RequestParam(required = true) String query,
-			@PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
-		
-		return boardRepository.getList(pageable);
+	private BoardPagingRepository boardRepository;
+	
+	public Page<Board> list(Model model, Pageable pageable){
+		return boardRepository.findAll(pageable);
 	}
 
 }

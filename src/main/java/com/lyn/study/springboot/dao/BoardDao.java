@@ -4,7 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.lyn.study.springboot.domain.Board;
+import com.lyn.study.springboot.entity.Board;
 
 public interface BoardDao extends JpaRepository<Board, Integer> {
 	

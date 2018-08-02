@@ -1,4 +1,4 @@
-package com.lyn.study.springboot.domain;
+package com.lyn.study.springboot.entity;
 
 import java.sql.Timestamp;
 
