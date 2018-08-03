@@ -2,6 +2,7 @@ package com.lyn.study.springboot.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,7 @@ public class Board {
 	// Mysql에서 Auto Increment, Oracle 에서는 Sequence와 동일한 일을 합니다.  
 	@GeneratedValue(strategy = GenerationType.AUTO) 
 	private int id; 
+	
 	private String title; 
 	private String writer; 
 	private String content; 
