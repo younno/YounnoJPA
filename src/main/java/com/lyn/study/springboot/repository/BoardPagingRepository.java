@@ -25,7 +25,7 @@ public interface BoardPagingRepository extends PagingAndSortingRepository<Board,
 	Page<Board> findByWriterLike(String content, Pageable pageable);
 	Page<Board> findByRegDateBetween(Date regdate1, Date regdate2, Pageable pageable);
 	
-	Page<Board> findByTitleLikeAndContentLikeAndWriterLike(String title, String content, String writer, Pageable pageable);
+	Page<Board> findByTitleLikeAndContentLikeAndWriterLikeAndRegDateBetween(String title, String content, String writer, Date regdate1, Date regdate2, Pageable pageable);
 	
 	@Query("SELECT u FROM Board u WHERE u.title = :title ")
 	Page<Board> findByTitle(@Param("title") String title, Pageable pageable);

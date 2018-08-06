@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 	
 	public Page<Board> findByMulti(Board board, Pageable pageable) {
-		return boardRepository.findByTitleLikeAndContentLikeAndWriterLike(board.getTitle(), board.getContent(), board.getWriter(), pageable);
+		return boardRepository.findByTitleLikeAndContentLikeAndWriterLikeAndRegDateBetween(board.getTitle(), board.getContent(), board.getWriter(), SqlUtils.stringToDate(board.getRegDate1()), SqlUtils.stringToDate(board.getRegDate2()), pageable);
 	}
 	
 	public Page<Board> findByTitle(String title, Pageable pageable){

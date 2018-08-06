@@ -29,6 +29,8 @@
 			frm.find("input[name=title]").val($("input[name=txTitle]").val()); 
 			frm.find("input[name=content]").val($("input[name=txContent]").val()); 
 			frm.find("input[name=writer]").val($("input[name=txWriter]").val()); 
+			frm.find("input[name=regdate1]").val($("input[name=txRegDate1]").val());
+			frm.find("input[name=regdate2]").val($("input[name=txRegDate2]").val());
 			frm.attr("action", "findMulti");
 			frm.submit();	
 		});
@@ -70,7 +72,7 @@
 		
 		$("input[type=text]").keypress(function(e){
 			if(e.which == 13){ 
-				
+				$("#btnSearch").trigger("click");
 			}
 		});
 	}

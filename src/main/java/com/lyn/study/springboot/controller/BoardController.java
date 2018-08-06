@@ -92,12 +92,16 @@ public class BoardController {
 			, @RequestParam(name="title", required = true) String title
 			, @RequestParam(name="content", required = true) String content
 			, @RequestParam(name="writer", required = true) String writer
+			, @RequestParam(name="regdate1", required = true) String regdate1
+			, @RequestParam(name="regdate2", required = true) String regdate2
 			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
 		log.debug("content = " + content + ", title = " + title);
 		Board board = new Board();
 		if(null != title) board.setTitle(SqlUtils.likeOpt(title));
 		if(null != content) board.setContent(SqlUtils.likeOpt(content));
 		if(null != writer) board.setWriter(SqlUtils.likeOpt(writer));
+		if(null != regdate1) board.setRegDate1(Optional.ofNullable(regdate1).orElse(Calendar.getInstance().getTime().toString()));
+		if(null != regdate2) board.setRegDate2(Optional.ofNullable(regdate2).orElse(Calendar.getInstance().getTime().toString()));
 		model.addAttribute("list", boardService.findByMulti(board, pageable));
 		return "board/list";
 	}
