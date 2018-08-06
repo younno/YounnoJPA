@@ -1,5 +1,6 @@
 package com.lyn.study.springboot.controller;
 
+import java.util.Calendar;
 import java.util.Optional;
 
 import org.jboss.logging.Param;
@@ -44,38 +45,60 @@ public class BoardController {
 		return "board/list";
 	}
 	
-	@RequestMapping("/title")
+	@RequestMapping("/findTitle")
 	public String title(Model model
 			, @RequestParam(name="title", required = true) String title
 			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
-		log.debug("title = " + title);
 		Board board = new Board();
 		board.setTitle("%"+Optional.ofNullable(title).orElse("")+"%");
 		model.addAttribute("list", boardService.findByTitleLike(board, pageable));
 		return "board/list";
 	}
 	
-	@RequestMapping("/content")
+	@RequestMapping("/findContent")
 	public String content(Model model
 			, @RequestParam(name="content", required = true) String content
 			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
-		log.debug("content = " + content);
 		Board board = new Board();
 		board.setContent("%"+Optional.ofNullable(content).orElse("")+"%");
 		model.addAttribute("list", boardService.findByContentLike(board, pageable));
 		return "board/list";
 	}
 	
-	@RequestMapping("/titleContent")
+	@RequestMapping("/findWriter")
+	public String writer(Model model
+			, @RequestParam(name="writer", required = true) String writer
+			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
+		Board board = new Board();
+		board.setWriter("%"+Optional.ofNullable(writer).orElse("")+"%");
+		model.addAttribute("list", boardService.findByContentLike(board, pageable));
+		return "board/list";
+	}
+	
+	@RequestMapping("/findRegdate")
+	public String regdate(Model model
+			, @RequestParam(name="regdate1", required = true) String regdate1
+			, @RequestParam(name="regdate2", required = true) String regdate2
+			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
+		Board board = new Board();
+		board.setRegDate1(Optional.ofNullable(regdate1).orElse(Calendar.getInstance().getTime().toString()));
+		board.setRegDate2(Optional.ofNullable(regdate2).orElse(Calendar.getInstance().getTime().toString()));
+		model.addAttribute("list", boardService.findByRegDateBetween(board, pageable));
+		return "board/list";
+	}
+	
+	@RequestMapping("/findMulti")
 	public String titleContent(Model model
 			, @RequestParam(name="title", required = true) String title
 			, @RequestParam(name="content", required = true) String content
+			, @RequestParam(name="writer", required = true) String writer
 			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
 		log.debug("content = " + content + ", title = " + title);
 		Board board = new Board();
 		if(null != title) board.setTitle(SqlUtils.likeOpt(title));
 		if(null != content) board.setContent(SqlUtils.likeOpt(content));
-		model.addAttribute("list", boardService.findByTitleLikeAndContentLike(board, pageable));
+		if(null != writer) board.setWriter(SqlUtils.likeOpt(writer));
+		model.addAttribute("list", boardService.findByMulti(board, pageable));
 		return "board/list";
 	}
 	

@@ -26,20 +26,52 @@
 		
 		$("#btnSearch").click(function(e){
 			var frm = $("#frm");
-			frm.find("input[name=title]").val($("input[name=txTitle]").val()); //frm.attr("action", "title");
-			frm.find("input[name=content]").val($("input[name=txContent]").val()); //frm.attr("action", "content");
-			
-			//frm.attr("action", "titleContent");
-			frm.attr("action", "sqlTitle");
+			frm.find("input[name=title]").val($("input[name=txTitle]").val()); 
+			frm.find("input[name=content]").val($("input[name=txContent]").val()); 
+			frm.find("input[name=writer]").val($("input[name=txWriter]").val()); 
+			frm.attr("action", "findMulti");
 			frm.submit();	
-			
-			console.log($("input[name=txTitle]").val());
+		});
+		
+		$("#btnSearchTitle").click(function(e){
+			var frm = $("#frm");
+			frm.find("input[name=title]").val($("input[name=txTitle]").val()); 
+			frm.attr("action", "findTitle");
+			frm.submit();	
+		});
+		
+		$("#btnSearchContent").click(function(e){
+			var frm = $("#frm");
+			frm.find("input[name=content]").val($("input[name=txContent]").val()); 
+			frm.attr("action", "findContent");
+			frm.submit();	
+		});
+		
+		$("#btnSearchWriter").click(function(e){
+			var frm = $("#frm");
+			frm.find("input[name=writer]").val($("input[name=txWriter]").val()); 
+			frm.attr("action", "findWriter");
+			frm.submit();	
+		});
+		
+		$("#btnSearchRegdate").click(function(e){
+			var frm = $("#frm");
+			frm.find("input[name=regdate1]").val($("input[name=txRegDate1]").val());
+			frm.find("input[name=regdate2]").val($("input[name=txRegDate2]").val());
+			frm.attr("action", "findRegdate");
+			frm.submit();	
 		});
 		
 		$("tbody a").click(function(e){
 			var frm = $("#frm");
 			frm.find("input[name=id]").val($(this).find("input[name=id]").val());
 			frm.submit();
+		});
+		
+		$("input[type=text]").keypress(function(e){
+			if(e.which == 13){ 
+				
+			}
 		});
 	}
 
@@ -48,13 +80,15 @@
 <body>
 
 ■ 검색조건 : <br/><br/>
-제목 : <input type="text" name="txTitle"/> <br/>
-내용 : <input type="text" name="txContent"/> <br/>
-작성자 : <input type="text" name="txWriter"/> <br/>
-등록일 : <input type="text" name="txRegDate1"/> ~ <input type="text" name="txRegDate2"/> <br/><br/>
+제목 : <input type="text" name="txTitle"/> &nbsp; <input type="button" id="btnSearchTitle" value="제목검색"/>  <br/> 
+내용 : <input type="text" name="txContent"/> &nbsp; <input type="button" id="btnSearchContent" value="내용검색"/>  <br/>
+작성자 : <input type="text" name="txWriter"/> &nbsp; <input type="button" id="btnSearchWriter" value="작성자검색"/>  <br/>
+등록일 : <input type="text" name="txRegDate1"/> ~ <input type="text" name="txRegDate2"/> &nbsp; <input type="button" id="btnSearchRegdate" value="작성일검색"/>  <br/>
+
+<br/><br/>
 
 <input type="button" id="btnReset" value="초기화"/> &nbsp;&nbsp;
-<input type="button" id="btnSearch" value="검색"/>  
+<input type="button" id="btnSearch" value="전체검색"/>  
 <br/><br/>
  
 ■ 검색결과 : <c:out value="${list.size }"/> 건
@@ -79,9 +113,9 @@
 			<td><a href="#"><c:out value="${n.index }"/><input type="hidden" name="id" value="${item.id }"/></a></td>
 			<td><c:out value="${item.title }"/></td>
 			<td><c:out value="${item.content }"/></td>
-			<td><fmt:formatDate value="${item.reg_date }" pattern="yyyy.MM.dd"/></td>
+			<td><fmt:formatDate value="${item.regDate }" pattern="yyyy.MM.dd"/></td>
 			<td><c:out value="${item.writer }"/></td>
-			<td><fmt:formatDate value="${item.mod_date }" pattern="yyyy.MM.dd"/></td>
+			<td><fmt:formatDate value="${item.modDate }" pattern="yyyy.MM.dd"/></td>
 			<td>N/A</td>
 		</tr>
 		</c:forEach> 
@@ -92,6 +126,9 @@
 <input type="hidden" name="id"/>
 <input type="hidden" name="title"/>
 <input type="hidden" name="content"/>
+<input type="hidden" name="writer"/>
+<input type="hidden" name="regdate1"/>
+<input type="hidden" name="regdate2"/>
 </form>
 </body>
 </html>

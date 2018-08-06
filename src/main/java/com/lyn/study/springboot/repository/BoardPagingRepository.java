@@ -1,7 +1,7 @@
 package com.lyn.study.springboot.repository;
 
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +21,11 @@ public interface BoardPagingRepository extends PagingAndSortingRepository<Board,
 	Page<Board> findAll(Specification<Board> spec, Pageable pageable);
 	
 	Page<Board> findByTitleLike(String title, Pageable pageable);
-	
 	Page<Board> findByContentLike(String content, Pageable pageable);
+	Page<Board> findByWriterLike(String content, Pageable pageable);
+	Page<Board> findByRegDateBetween(Date regdate1, Date regdate2, Pageable pageable);
 	
-	Page<Board> findByTitleLikeAndContentLike(String title, String content, Pageable pageable);
+	Page<Board> findByTitleLikeAndContentLikeAndWriterLike(String title, String content, String writer, Pageable pageable);
 	
 	@Query("SELECT u FROM Board u WHERE u.title = :title ")
 	Page<Board> findByTitle(@Param("title") String title, Pageable pageable);

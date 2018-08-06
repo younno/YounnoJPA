@@ -16,8 +16,10 @@ public interface BoardService {
 
 	public Page<Board> findByContentLike(Board board, Pageable pageable);
 	public Page<Board> findByTitleLike(Board board, Pageable pageable);
+	public Page<Board> findByWriterLike(Board board, Pageable pageable);
+	public Page<Board> findByRegDateBetween(Board board, Pageable pageable);
 	
-	public Page<Board> findByTitleLikeAndContentLike(Board board, Pageable pageable);
+	public Page<Board> findByMulti(Board board, Pageable pageable);
 	
 	Page<Board> findByTitle(String title, Pageable pageable);
 }

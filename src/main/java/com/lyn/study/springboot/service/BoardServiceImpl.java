@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.lyn.study.springboot.common.SqlUtils;
 import com.lyn.study.springboot.entity.Board;
 import com.lyn.study.springboot.repository.BoardPagingRepository;
 
@@ -37,8 +38,16 @@ public class BoardServiceImpl implements BoardService{
 		return boardRepository.findByContentLike(board.getContent(), pageable);
 	}
 	
-	public Page<Board> findByTitleLikeAndContentLike(Board board, Pageable pageable) {
-		return boardRepository.findByTitleLikeAndContentLike(board.getTitle(), board.getContent(), pageable);
+	public Page<Board> findByWriterLike(Board board, Pageable pageable) {
+		return boardRepository.findByWriterLike(board.getContent(), pageable);
+	}
+	
+	public Page<Board> findByRegDateBetween(Board board, Pageable pageable) {
+		return boardRepository.findByRegDateBetween(SqlUtils.stringToDate(board.getRegDate1()), SqlUtils.stringToDate(board.getRegDate2()), pageable);
+	}
+	
+	public Page<Board> findByMulti(Board board, Pageable pageable) {
+		return boardRepository.findByTitleLikeAndContentLikeAndWriterLike(board.getTitle(), board.getContent(), board.getWriter(), pageable);
 	}
 	
 	public Page<Board> findByTitle(String title, Pageable pageable){

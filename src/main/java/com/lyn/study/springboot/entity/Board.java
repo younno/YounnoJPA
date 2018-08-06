@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -37,10 +38,14 @@ public class Board {
 	
 	// 엔티티가 생성되는 시점의 날짜 데이터를 기록하는 설정
 	@CreationTimestamp 
-	private Timestamp reg_date; 
+	private Timestamp regDate; 
 	// 엔티티가 업데이트되는 시점의 날짜 데이터를 기록하는 설정
 	@UpdateTimestamp 
-	private Timestamp mod_date;	
+	private Timestamp modDate;	
+	
+	@Transient
+	private String regDate1;
+	private String regDate2;
 	
 
 }
