@@ -22,4 +22,7 @@ public interface BoardService {
 	public Page<Board> findByMulti(Board board, Pageable pageable);
 	
 	Page<Board> findByTitle(String title, Pageable pageable);
+	
+	
+	public Board saveBoard(Board board);
 }

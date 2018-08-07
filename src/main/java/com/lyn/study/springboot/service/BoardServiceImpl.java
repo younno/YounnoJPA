@@ -1,18 +1,16 @@
 package com.lyn.study.springboot.service;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.lyn.study.springboot.common.SqlUtils;
 import com.lyn.study.springboot.entity.Board;
-import com.lyn.study.springboot.repository.BoardPagingRepository;
+import com.lyn.study.springboot.repository.crud.BoardCrudRepository;
+import com.lyn.study.springboot.repository.paging.BoardPagingRepository;
 
 
 @Service("board")
@@ -21,6 +19,9 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	private BoardPagingRepository boardRepository;
+	
+	@Autowired
+	private BoardCrudRepository boardCurdRepository;
 	
 	public Page<Board> list(Pageable pageable){
 		return boardRepository.findAll(pageable);
@@ -52,5 +53,9 @@ public class BoardServiceImpl implements BoardService{
 	
 	public Page<Board> findByTitle(String title, Pageable pageable){
 		return boardRepository.findByTitle(title, pageable);
+	}
+	
+	public Board saveBoard(Board board) {
+		return boardCurdRepository.save(board);
 	}
 }

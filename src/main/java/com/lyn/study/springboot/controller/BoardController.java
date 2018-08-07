@@ -1,16 +1,19 @@
 package com.lyn.study.springboot.controller;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Optional;
 
-import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -41,7 +44,10 @@ public class BoardController {
 	public String list(Model model
 			, @RequestParam(name="title", required = false) String title
 			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
-		model.addAttribute("list", boardService.list(pageable));
+		
+		Page<Board> page = boardService.list(pageable);
+		model.addAttribute("list", page);
+		//page.
 		return "board/list";
 	}
 	
@@ -103,6 +109,7 @@ public class BoardController {
 		if(null != regdate1) board.setRegDate1(Optional.ofNullable(regdate1).orElse(Calendar.getInstance().getTime().toString()));
 		if(null != regdate2) board.setRegDate2(Optional.ofNullable(regdate2).orElse(Calendar.getInstance().getTime().toString()));
 		model.addAttribute("list", boardService.findByMulti(board, pageable));
+		
 		return "board/list";
 	}
 	
@@ -118,6 +125,18 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping("/saveboard")
+	public String sqlTitle(Model model
+			, @ModelAttribute("bean")Board board
+			, @PageableDefault(sort = { "id" }, direction = Direction.DESC, size = 5) Pageable pageable) {
+		log.debug("title = " + board.toString());
+		Board result = boardService.saveBoard(board);
+		
+		model.addAttribute("list", result);
+		return "board/list";
+	}
+	
+	
 	@RequestMapping("/detail")
 	public String id(Model model 
 			, @RequestParam(name="id") int id
@@ -127,6 +146,25 @@ public class BoardController {
 		board.setId(Optional.ofNullable(id).orElse(0));
 		model.addAttribute("item", boardService.findById(board, pageable));
 		return "board/detail";
+	}
+	
+	
+	@RequestMapping("/new")
+	public String newBoard(Model model) {
+		return "board/new";
+	}
+	
+	@RequestMapping("/save")
+	public String saveBoard(Model model
+			, @ModelAttribute("bean")Board board) {
+		
+		board.setRegDate(Timestamp.valueOf(LocalDate.parse(board.getRegDate1(),DateTimeFormatter.ofPattern("yyyyMMdd")).atStartOfDay()));
+		
+		Board result = boardService.saveBoard(board);
+		
+		model.addAttribute("result", result);
+		return "redirect:/list";
+
 	}
 	
 	

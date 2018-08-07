@@ -1,4 +1,4 @@
-package com.lyn.study.springboot.repository;
+package com.lyn.study.springboot.repository.paging;
 
 
 import java.util.Date;

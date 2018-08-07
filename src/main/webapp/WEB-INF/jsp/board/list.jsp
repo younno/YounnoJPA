@@ -70,11 +70,25 @@
 			frm.submit();
 		});
 		
+		$("#btnNew").click(function(e){
+			var frm = $("#frm");
+			frm.attr("action", "new");
+			frm.submit();
+		});
+		
 		$("input[type=text]").keypress(function(e){
 			if(e.which == 13){ 
 				$("#btnSearch").trigger("click");
 			}
 		});
+		
+	}
+	
+	function page(n){
+		var frm = $("#frm");
+		frm.find("input[name=page]").val(n);
+		frm.attr("action", "list");
+		frm.submit();
 	}
 
 </script>
@@ -89,6 +103,7 @@
 
 <br/><br/>
 
+<input type="button" id="btnNew" value="새로작성"/>  &nbsp;&nbsp;
 <input type="button" id="btnReset" value="초기화"/> &nbsp;&nbsp;
 <input type="button" id="btnSearch" value="전체검색"/>  
 <br/><br/>
@@ -112,7 +127,7 @@
 	<tbody>
 		<c:forEach var="item" items="${list.content }" varStatus="n">
 		<tr>
-			<td><a href="#"><c:out value="${n.index }"/><input type="hidden" name="id" value="${item.id }"/></a></td>
+			<td><a href="#"><c:out value="${item.id }"/><input type="hidden" name="id" value="${item.id }"/></a></td>
 			<td><c:out value="${item.title }"/></td>
 			<td><c:out value="${item.content }"/></td>
 			<td><fmt:formatDate value="${item.regDate }" pattern="yyyy.MM.dd"/></td>
@@ -123,12 +138,23 @@
 		</c:forEach> 
 	</tbody>
 </table>
+<br/>
+
+Paging : 
+<c:forEach var="item" begin="0" end="${list.totalPages-1 }" step="1" varStatus="n">
+	<a href="javascript:page(${n.index })"><c:out value="${n.count }"/></a>
+</c:forEach>
+<br/><br/><br/>
 
 <form id="frm" name="frm" action="detail">
 <input type="hidden" name="id"/>
 <input type="hidden" name="title"/>
 <input type="hidden" name="content"/>
 <input type="hidden" name="writer"/>
+<input type="hidden" name="regdate"/>
+
+<input type="hidden" name="page"/>
+
 <input type="hidden" name="regdate1"/>
 <input type="hidden" name="regdate2"/>
 </form>
