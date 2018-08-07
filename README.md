@@ -25,3 +25,11 @@ JPA(+Springboot) 를 학습중입니다.
 - CrudRepository
 6. 화면 처리 
 - Sitemesh 3.0.1 (Java Configuration)
+
+
+해야할 것들.... 
+1. 검색 기능 
+- 다중 테이블 조회, 조회복잡도 상향, 통계 등 
+- 검색방식 : JPQL(Java Persistence Query Language), Querydsl, Criteria Query 
+2. 저장/수정/삭제 기능
+- 트랜잭션 처리, 복수테이블 처리 
