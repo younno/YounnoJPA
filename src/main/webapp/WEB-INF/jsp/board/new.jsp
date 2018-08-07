@@ -30,15 +30,24 @@
 </script>
 </head>
 <body>
-<form id="frm" name="frm" action="detail">
+<form id="frm" name="frm" >
 
-■ 신규생성 : <br/><br/>
-ID : <input type="text" name="id"/>  
-제목 : <input type="text" name="title"/>  
-내용 : <input type="text" name="content"/> 
-작성자 : <input type="text" name="writer"/>  &nbsp;<input type="button" id="btnSave" value="save"/>  <br/>
-<br/><br/>
-
+<div>
+	<h3 class="h_tit">■ 신규생성 </h3>
+	<ul>
+		<li>ID : <input type="text" name="id"/></li>
+	</ul>
+	<ul>
+		<li>제목 : <input type="text" name="title"/></li>
+	</ul>
+	<ul>
+		<li>내용 : <input type="text" name="content"/></li>
+	</ul>
+	<ul>
+		<li>작성자 : <input type="text" name="writer"/></li>
+	</ul>  
+</div>
+<input type="button" id="btnSave" value="save"/>
 </form>
 </body>
 </html>

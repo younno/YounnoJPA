@@ -25,4 +25,5 @@ public interface BoardService {
 	
 	
 	public Board saveBoard(Board board);
+	public void deleteBoard(Board board);
 }

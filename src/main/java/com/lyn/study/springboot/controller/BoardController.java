@@ -163,5 +163,26 @@ public class BoardController {
 
 	}
 	
+	@RequestMapping("/update")
+	public String updateBoard(Model model
+			, @ModelAttribute("bean")Board board) {
+		Board result = boardService.saveBoard(board);
+		model.addAttribute("result", result);
+		return "redirect:/list";
+
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteBoard(Model model
+			, @ModelAttribute("bean")Board board) {
+		boolean result = true;
+		try {
+			boardService.deleteBoard(board);
+		}catch(Exception e) {
+			result = false;
+		}
+		model.addAttribute("result", result);
+		return "redirect:/list";
+	}
 	
 }

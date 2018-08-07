@@ -58,4 +58,8 @@ public class BoardServiceImpl implements BoardService{
 	public Board saveBoard(Board board) {
 		return boardCurdRepository.save(board);
 	}
+	
+	public void deleteBoard(Board board) {
+		boardCurdRepository.delete(board);
+	}
 }
