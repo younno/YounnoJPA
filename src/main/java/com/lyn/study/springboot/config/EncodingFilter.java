@@ -11,15 +11,16 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration	
 public class EncodingFilter {
 	
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	@Bean
 	/*CharacterEncodingFilter로 하면 안되고, Filter로 하니까 깨지지 않고 잘 됨
 		출처: http://countryxide.tistory.com/10 [배워서 남주자]
 	 */
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	@Bean
 	public Filter  characterEncodingFilter() {
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         return filter;
     }
+	
 }

@@ -36,8 +36,7 @@
 ID : <input type="text" name="id"/>  
 제목 : <input type="text" name="title"/>  
 내용 : <input type="text" name="content"/> 
-작성자 : <input type="text" name="writer"/> 
-등록일 : <input type="text" name="regDate1"/> &nbsp; <input type="button" id="btnSave" value="save"/>  <br/>
+작성자 : <input type="text" name="writer"/>  &nbsp;<input type="button" id="btnSave" value="save"/>  <br/>
 <br/><br/>
 
 </form>

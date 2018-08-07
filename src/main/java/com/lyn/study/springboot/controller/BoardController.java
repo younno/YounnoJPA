@@ -157,11 +157,7 @@ public class BoardController {
 	@RequestMapping("/save")
 	public String saveBoard(Model model
 			, @ModelAttribute("bean")Board board) {
-		
-		board.setRegDate(Timestamp.valueOf(LocalDate.parse(board.getRegDate1(),DateTimeFormatter.ofPattern("yyyyMMdd")).atStartOfDay()));
-		
 		Board result = boardService.saveBoard(board);
-		
 		model.addAttribute("result", result);
 		return "redirect:/list";
 

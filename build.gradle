@@ -59,6 +59,9 @@ dependencies {
 	compile('org.webjars.bower:jquery:3.3.1')
 	compile('org.webjars.bower:bootstrap:4.1.3')
 	
+	//sitemesh
+	compile('org.sitemesh:sitemesh:3.0.1')
+	
 }
 
 

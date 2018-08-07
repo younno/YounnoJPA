@@ -7,9 +7,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="/webjars/jquery/3.3.1/dist/jquery.min.js"></script>
-<script src="/webjars/bootstrap/4.1.3/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 	$( document ).ready(function() {
 	
@@ -108,7 +105,7 @@
 <input type="button" id="btnSearch" value="전체검색"/>  
 <br/><br/>
  
-■ 검색결과 : <c:out value="${list.size }"/> 건
+■ 검색결과 : <c:out value="${list.totalElements }"/> 건
 
 <br/><br/>
 
@@ -140,10 +137,12 @@
 </table>
 <br/>
 
+<c:if test="${list.totalPages > 0 }">
 Paging : 
 <c:forEach var="item" begin="0" end="${list.totalPages-1 }" step="1" varStatus="n">
 	<a href="javascript:page(${n.index })"><c:out value="${n.count }"/></a>
 </c:forEach>
+</c:if>
 <br/><br/><br/>
 
 <form id="frm" name="frm" action="detail">

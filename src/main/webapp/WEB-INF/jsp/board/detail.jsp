@@ -52,9 +52,9 @@
 			<td><c:out value="${item.id }"/></td>
 			<td><c:out value="${item.title }"/></td>
 			<td><c:out value="${item.content }"/></td>
-			<td><fmt:formatDate value="${item.reg_date }" pattern="yyyy.MM.dd"/></td>
+			<td><fmt:formatDate value="${item.regDate }" pattern="yyyy.MM.dd"/></td>
 			<td><c:out value="${item.writer }"/></td>
-			<td><fmt:formatDate value="${item.mod_date }" pattern="yyyy.MM.dd"/></td>
+			<td><fmt:formatDate value="${item.modDate }" pattern="yyyy.MM.dd"/></td>
 			<td></td>
 		</tr>
 	</tbody>
